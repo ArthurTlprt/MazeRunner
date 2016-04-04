@@ -25,6 +25,7 @@ private:
     cell downCell;
     /* J'hesite à faire un tableau de cell plutot que chaque cell */
     int idCell;
+    bool marked
     // int value;
     /* Pas sur que l'on ai besoin d'une valeur si on a l'id */
 };
