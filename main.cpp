@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include "cell.h"
 #include <iostream>
@@ -9,7 +10,4 @@ int main(int argc, char **argv)
     cell* ptr = firstCell.getNextCell();
     std::cout << firstCell.getId() << std::endl;
     std::cout << ptr->getId() << std::endl;
-
-    /**/
-	return 0;
 }
