@@ -5,6 +5,15 @@ cell::cell()
 {
 }
 
+cell::cell(int x, int y) {
+    
+}
+
+cell::cell(cell* left, cell* up, cell* right, cell* down) {
+
+}
+
+
 cell::cell(int id){
     idCell = id;
     std::clog << "LOG : cell number : " << idCell << " created." << std::endl;
@@ -60,7 +69,7 @@ cell* cell::getNextCell(){
  * @return int id
  */
 int cell::getId(){
-    return idCell;
+    return id;
 }
 
 /**
@@ -94,6 +103,11 @@ void cell::setRightCell(cell* right){
 void cell::setDownCell(cell* down){
     downCell = down;
 }
+
+void cell::setId(int id) {
+    this->id = id;
+}
+
 
 cell::~cell(){
     

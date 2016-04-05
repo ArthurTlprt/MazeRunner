@@ -6,6 +6,7 @@ class cell
 public:
     cell();
     cell(int id);
+    cell(int x, int y);
     cell(cell* left,cell* up,cell* right,cell* down);
     ~cell();
     int getId();
@@ -34,7 +35,7 @@ private:
     int x;
     int y;
     /* J'hesite à faire un tableau de cell plutot que chaque cell */
-    int idCell;
+    int id;
     bool marked;
     // int value;
     /* Pas sur que l'on ai besoin d'une valeur si on a l'id */
