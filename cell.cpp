@@ -15,8 +15,8 @@ cell::cell(cell* left, cell* up, cell* right, cell* down) {
 
 
 cell::cell(int id){
-    idCell = id;
-    std::clog << "LOG : cell number : " << idCell << " created." << std::endl;
+    this->id = id;
+    std::clog << "LOG : cell number : " << this->id << " created." << std::endl;
 }
 /**
  * @brief getteur celulle de gauche
