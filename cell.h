@@ -15,6 +15,7 @@ public:
     cell* getRightCell();
     cell* getDownCell();
     cell* getNextCell();
+    void setNeighborhood(cell* left, cell* up,cell* right,cell* down);
     void setLeftCell(cell* left);
     void setUpCell(cell* up);
     void setRightCell(cell* right);
@@ -26,15 +27,15 @@ private:
     cell* upCell;
     cell* rightCell;
     cell* downCell;
-    // true si cellul donne sur une cloison
-    bool dividerLeft;
-    bool dividerUp;
-    bool dividerRight;
-    bool dividerDown;
+    // true si cellule donne sur une cloison 
+    bool* dividerLeft;
+    bool* dividerUp;
+    bool* dividerRight;
+    bool* dividerDown;
     // coordonnées de la cellule
     int x;
     int y;
-    /* J'hesite à faire un tableau de cell plutot que chaque cell */
+    
     int id;
     bool marked;
     // int value;

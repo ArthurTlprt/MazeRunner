@@ -72,6 +72,14 @@ int cell::getId(){
     return id;
 }
 
+void cell::setNeighborhood(cell* left = NULL,cell* up = NULL,cell* right = NULL, cell* down = NULL) {
+    setUpCell(up);
+    setDownCell(down);
+    setLeftCell(left);
+    setRightCell(right);
+}
+
+
 /**
  * @brief Attribut une celulle à sa gauche
  * @param left cellule de gauche
