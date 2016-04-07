@@ -72,7 +72,7 @@ int cell::getId(){
     return id;
 }
 
-void cell::setNeighborhood(cell* left = NULL,cell* up = NULL,cell* right = NULL, cell* down = NULL) {
+void cell::setNeighborhood(cell* left, cell* up, cell* right, cell* down) {
     setUpCell(up);
     setDownCell(down);
     setLeftCell(left);

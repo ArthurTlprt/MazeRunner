@@ -21,21 +21,20 @@ public:
     void setRightCell(cell* right);
     void setDownCell(cell* down);
     void setId(int id);
+    // true si cellule donne sur une cloison 
+    bool* dividerLeft;
+    bool* dividerUp;
+    bool* dividerRight;
+    bool* dividerDown;
 private:
     // ref vers cellule voisine, NULL si la cell donne sur un mur
     cell* leftCell;
     cell* upCell;
     cell* rightCell;
     cell* downCell;
-    // true si cellule donne sur une cloison 
-    bool* dividerLeft;
-    bool* dividerUp;
-    bool* dividerRight;
-    bool* dividerDown;
     // coordonnées de la cellule
     int x;
     int y;
-    
     int id;
     bool marked;
     // int value;

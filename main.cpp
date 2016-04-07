@@ -27,7 +27,10 @@ int main(int argc, char **argv)
     
     //  display all ids
     
-    lab.printIds();
+    //lab.printIds();
+    
+    cell *left = lab.getCell(2, 1).getRightCell();
+    std::cout << left->getId() << std::endl;
     
     return 0;
 }
