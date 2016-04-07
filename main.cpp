@@ -2,6 +2,13 @@
 #include "cell.h"
 #include <iostream>
 #include <vector>
+#include <string>
+
+void printNtimes(std::string str, int n){
+    for(int i = 0; i < n; ++i){
+        std::cout << str;
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -21,26 +28,30 @@ int main(int argc, char **argv)
     */
     
     int width, height;
-    
+    std::cout << "Setting the width" << std::endl;
     std::cin >> width;
+    std::cout << "Setting the height" << std::endl;
     std::cin >> height;
     
     for(int i = 0; i < height; ++i){
         std::vector<cell> line;
         for(int j = 0; j < width; ++j){
             if(j == 0){
-                std::cout << std::string(width, '+--') << std::endl;
+                printNtimes("+--", width);
+                std::cout << "+" << std::endl;
             }
             cell newCell = cell(i, j);
             newCell.setId((i)*width + j);
             
             line.push_back(newCell);
             
-            std::cout << "|" << newCell.getId() ;
+            std::cout << "|  " ;
         }
-        std::cout << "|" << std::endl;
+        std::cout << "|  " << std::endl;
         maze.push_back(line);
     }
+    printNtimes("+--", width);
+    std::cout << "+" << std::endl;
     
     
     int tab[] = {0, 1, 2, 3, 4, 5};
