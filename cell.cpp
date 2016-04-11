@@ -7,13 +7,16 @@ cell::cell()
 }
 
 cell::cell(int x, int y) {
-    
-}
-
-cell::cell(cell* left, cell* up, cell* right, cell* down) {
 
 }
 
+
+cell::cell(const cell& left, const cell& up, const cell& right,const cell& down){
+  setUpCell(up);
+  setDownCell(down);
+  setLeftCell(left);
+  setRightCell(right);
+}
 
 cell::cell(int id){
     this->id = id;
@@ -23,15 +26,15 @@ cell::cell(int id){
  * @brief getteur celulle de gauche
  * @return cell
  */
-cell* cell::getLeftCell(){
+const cell & cell::getLeftCell(){
     return leftCell;
 }
 
 /**
- * @brief getteur celulle du haut 
+ * @brief getteur celulle du haut
  * @return cell
  */
-cell* cell::getUpCell(){
+const cell & cell::getUpCell(){
     return upCell;
 }
 
@@ -39,7 +42,7 @@ cell* cell::getUpCell(){
  * @brief getteur celulle de droite
  * @return cell
  */
-cell* cell::getRightCell(){
+const cell & cell::getRightCell(){
     return rightCell;
 }
 
@@ -47,22 +50,8 @@ cell* cell::getRightCell(){
  * @brief getteur de celulle du bas
  * @return cell
  */
-cell* cell::getDownCell(){
+const cell & cell::getDownCell(){
     return downCell;
-}
-
-/**
- * @brief Retourne la cellule suivant de l'actuelle
- * @return cell ou NULL Cellule Suivante
- */
-cell* cell::getNextCell(){
-    if(rightCell != NULL){
-        return rightCell;
-    }else if(downCell != NULL){
-        return downCell;
-    }else{
-        return NULL;
-    }
 }
 
 /**
@@ -73,7 +62,7 @@ int cell::getId(){
     return id;
 }
 
-void cell::setNeighborhood(cell* left, cell* up, cell* right, cell* down) {
+void cell::setNeighborhood(const cell& left, const cell& up, const cell& right,const cell& down) {
     setUpCell(up);
     setDownCell(down);
     setLeftCell(left);
@@ -85,7 +74,7 @@ void cell::setNeighborhood(cell* left, cell* up, cell* right, cell* down) {
  * @brief Attribut une celulle à sa gauche
  * @param left cellule de gauche
  */
-void cell::setLeftCell(cell* left){
+void cell::setLeftCell(const cell& left){
     leftCell = left;
 }
 
@@ -93,7 +82,7 @@ void cell::setLeftCell(cell* left){
  * @brief Attribut une celulle au dessus
  * @param up celulle du dessus
  */
-void cell::setUpCell(cell* up){
+void cell::setUpCell(const cell& up){
     upCell = up;
 }
 
@@ -101,7 +90,7 @@ void cell::setUpCell(cell* up){
  * @brief Attribut une celulle à sa droite
  * @param right celulle de droite
  */
-void cell::setRightCell(cell* right){
+void cell::setRightCell(const cell& right){
     rightCell = right;
 }
 
@@ -109,7 +98,7 @@ void cell::setRightCell(cell* right){
  * @brief Attribut une cellule au dessous
  * @param down celulle du dessous
  */
-void cell::setDownCell(cell* down){
+void cell::setDownCell(const cell& down){
     downCell = down;
 }
 
@@ -117,46 +106,45 @@ void cell::setId(int id) {
     this->id = id;
 }
 
-void cell::setDividerLeft(bool* divLeft) {
-    this->dividerLeft = divLeft;
+void cell::setDividerLeft(const bool& left) {
+    this->dividerLeft = left;
 }
 
-void cell::setDividerUp(bool* divUp) {
-    this->dividerUp = divUp;
+void cell::setDividerUp(const bool& up) {
+    this->dividerUp = up;
 }
 
-void cell::setDividerRight(bool* divRight) {
-    this->dividerRight = divRight;    
+void cell::setDividerRight(const bool& right) {
+    this->dividerRight = right;
 }
 
-void cell::setDividerDown(bool* divDown) {
-    this->dividerDown = divDown;
+void cell::setDividerDown(const bool& down) {
+    this->dividerDown = down;
 }
 
-void cell::setDividers(bool *divLeft, bool *divUp, bool *divRight, bool *divDown){
-    cell::setDividerLeft(divLeft);
-    cell::setDividerRight(divRight);
-    cell::setDividerUp(divUp);
-    cell::setDividerDown(divDown);
+void cell::setDividers(const bool& left, const bool& up, const bool& right, const bool& down){
+    cell::setDividerLeft(left);
+    cell::setDividerRight(right);
+    cell::setDividerUp(up);
+    cell::setDividerDown(down);
 }
 
-bool* cell::getDividerLeft(){
+const bool & cell::getDividerLeft(){
     return dividerLeft;
 }
 
-bool* cell::getDividerUp(){
+const bool & cell::getDividerUp(){
     return dividerUp;
 }
 
-bool* cell::getDividerRight(){
+const bool & cell::getDividerRight(){
     return dividerRight;
 }
 
-bool* cell::getDividerDown(){
+const bool & cell::getDividerDown(){
     return dividerDown;
 }
 
 cell::~cell(){
-    
-}
 
+}
