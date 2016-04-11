@@ -21,15 +21,15 @@ public:
     void setUpCell(cell* up);
     void setRightCell(cell* right);
     void setDownCell(cell* down);
-    void setDividers(bool *divLeft, bool *divUp, bool *divRight, bool *divDown);
-    void setDividerLeft(bool *divLeft);
-    void setDividerUp(bool *divUp);
-    void setDividerRight(bool *divRight);
-    void setDividerDown(bool *divDown);
-    bool* getDividerLeft();
-    bool* getDividerUp();
-    bool* getDividerRight();
-    bool* getDividerDown();
+    void setDividers(int *divLeft, int *divUp, int *divRight, int *divDown);
+    void setDividerLeft(int *divLeft);
+    void setDividerUp(int *divUp);
+    void setDividerRight(int *divRight);
+    void setDividerDown(int *divDown);
+    int* getDividerLeft();
+    int* getDividerUp();
+    int* getDividerRight();
+    int* getDividerDown();
     void setId(int id);
 private:
     // ref vers cellule voisine, NULL si la cell donne sur un mur
@@ -42,11 +42,16 @@ private:
     int y;
     int id;
     int marked;
-    // true si cellule donne sur une cloison 
-    bool* dividerLeft;
-    bool* dividerUp;
-    bool* dividerRight;
-    bool* dividerDown;
+    /**
+     *  si la cellule done sur:
+     *  - un mur = -1
+     *  - une cloison = 1
+     *  - la cellule voisine = 0
+     */
+    int* dividerLeft;
+    int* dividerUp;
+    int* dividerRight;
+    int* dividerDown;
     // int value;
     /* Pas sur que l'on ai besoin d'une valeur si on a l'id */
 };

@@ -107,42 +107,42 @@ void cell::setId(int id) {
     this->id = id;
 }
 
-void cell::setDividerLeft(const bool& left) {
-    this->dividerLeft = left;
+void cell::setDividerLeft(int* divLeft) {
+    this->dividerLeft = divLeft;
 }
 
-void cell::setDividerUp(const bool& up) {
-    this->dividerUp = up;
+void cell::setDividerUp(int* divUp) {
+    this->dividerUp = divUp;
 }
 
-void cell::setDividerRight(const bool& right) {
-    this->dividerRight = right;
+void cell::setDividerRight(int* divRight) {
+    this->dividerRight = divRight;
 }
 
-void cell::setDividerDown(const bool& down) {
-    this->dividerDown = down;
+void cell::setDividerDown(int* divDown) {
+    this->dividerDown = divDown;
 }
 
-void cell::setDividers(const bool& left, const bool& up, const bool& right, const bool& down){
-    cell::setDividerLeft(left);
-    cell::setDividerRight(right);
-    cell::setDividerUp(up);
-    cell::setDividerDown(down);
+void cell::setDividers(int *divLeft, int *divUp, int *divRight, int *divDown){
+    cell::setDividerLeft(divLeft);
+    cell::setDividerRight(divRight);
+    cell::setDividerUp(divUp);
+    cell::setDividerDown(divDown);
 }
 
-const bool & cell::getDividerLeft(){
+int* cell::getDividerLeft(){
     return dividerLeft;
 }
 
-const bool & cell::getDividerUp(){
+int* cell::getDividerUp(){
     return dividerUp;
 }
 
-const bool & cell::getDividerRight(){
+int* cell::getDividerRight(){
     return dividerRight;
 }
 
-const bool & cell::getDividerDown(){
+int* cell::getDividerDown(){
     return dividerDown;
 }
 
