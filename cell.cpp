@@ -22,6 +22,7 @@ cell::cell(int id){
     this->id = id;
     std::clog << "LOG : cell number : " << this->id << " created." << std::endl;
 }
+
 /**
  * @brief getteur celulle de gauche
  * @return cell
