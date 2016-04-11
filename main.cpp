@@ -29,8 +29,11 @@ int main(int argc, char **argv)
     
     //lab.printIds();
     
-    cell *left = lab.getCell(2, 1).getRightCell();
-    std::cout << left->getId() << std::endl;
-    
+    cell potiron = lab.getCell(0, 0);
+    std::cout << *(potiron.getDividerLeft()) << std::endl;
+    if(*(potiron.getDividerLeft()) == 1){
+        std::cout << "nous on veut des nichons" << std::endl;
+    }
+   
     return 0;
 }

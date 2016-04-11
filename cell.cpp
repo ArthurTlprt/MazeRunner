@@ -1,3 +1,4 @@
+
 #include "cell.h"
 #include <iostream>
 
@@ -116,7 +117,46 @@ void cell::setId(int id) {
     this->id = id;
 }
 
+void cell::setDividerLeft(bool* divLeft) {
+    this->dividerLeft = divLeft;
+}
+
+void cell::setDividerUp(bool* divUp) {
+    this->dividerUp = divUp;
+}
+
+void cell::setDividerRight(bool* divRight) {
+    this->dividerRight = divRight;    
+}
+
+void cell::setDividerDown(bool* divDown) {
+    this->dividerDown = divDown;
+}
+
+void cell::setDividers(bool *divLeft, bool *divUp, bool *divRight, bool *divDown){
+    cell::setDividerLeft(divLeft);
+    cell::setDividerRight(divRight);
+    cell::setDividerUp(divUp);
+    cell::setDividerDown(divDown);
+}
+
+bool* cell::getDividerLeft(){
+    return dividerLeft;
+}
+
+bool* cell::getDividerUp(){
+    return dividerUp;
+}
+
+bool* cell::getDividerRight(){
+    return dividerRight;
+}
+
+bool* cell::getDividerDown(){
+    return dividerDown;
+}
 
 cell::~cell(){
     
 }
+
