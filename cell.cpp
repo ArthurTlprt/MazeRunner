@@ -7,7 +7,7 @@ cell::cell()
 }
 
 cell::cell(int x, int y) {
-    
+
 }
 
 cell::cell(cell* left, cell* up, cell* right, cell* down) {
@@ -28,7 +28,7 @@ cell* cell::getLeftCell(){
 }
 
 /**
- * @brief getteur celulle du haut 
+ * @brief getteur celulle du haut
  * @return cell
  */
 cell* cell::getUpCell(){
@@ -117,46 +117,45 @@ void cell::setId(int id) {
     this->id = id;
 }
 
-void cell::setDividerLeft(bool* divLeft) {
+void cell::setDividerLeft(int* divLeft) {
     this->dividerLeft = divLeft;
 }
 
-void cell::setDividerUp(bool* divUp) {
+void cell::setDividerUp(int* divUp) {
     this->dividerUp = divUp;
 }
 
-void cell::setDividerRight(bool* divRight) {
-    this->dividerRight = divRight;    
+void cell::setDividerRight(int* divRight) {
+    this->dividerRight = divRight;
 }
 
-void cell::setDividerDown(bool* divDown) {
+void cell::setDividerDown(int* divDown) {
     this->dividerDown = divDown;
 }
 
-void cell::setDividers(bool *divLeft, bool *divUp, bool *divRight, bool *divDown){
+void cell::setDividers(int *divLeft, int *divUp, int *divRight, int *divDown){
     cell::setDividerLeft(divLeft);
     cell::setDividerRight(divRight);
     cell::setDividerUp(divUp);
     cell::setDividerDown(divDown);
 }
 
-bool* cell::getDividerLeft(){
+int* cell::getDividerLeft(){
     return dividerLeft;
 }
 
-bool* cell::getDividerUp(){
+int* cell::getDividerUp(){
     return dividerUp;
 }
 
-bool* cell::getDividerRight(){
+int* cell::getDividerRight(){
     return dividerRight;
 }
 
-bool* cell::getDividerDown(){
+int* cell::getDividerDown(){
     return dividerDown;
 }
 
 cell::~cell(){
-    
-}
 
+}

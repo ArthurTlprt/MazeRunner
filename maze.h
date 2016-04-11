@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   maze.h
  * Author: isen
  *
@@ -26,10 +26,9 @@ public:
 private:
     void initCells();
     std::vector<std::vector<cell> > cells;
-    std::vector<bool >dividers;
+    std::vector<int >dividers;
     int width;
     int height;
 };
 
 #endif	/* MAZE_H */
-
