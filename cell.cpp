@@ -10,24 +10,20 @@ cell::cell(int x, int y) {
 
 }
 
+cell::cell(cell* left, cell* up, cell* right, cell* down) {
 
-cell::cell(const cell& left, const cell& up, const cell& right,const cell& down){
-  setUpCell(up);
-  setDownCell(down);
-  setLeftCell(left);
-  setRightCell(right);
 }
+
 
 cell::cell(int id){
     this->id = id;
     std::clog << "LOG : cell number : " << this->id << " created." << std::endl;
 }
-
 /**
  * @brief getteur celulle de gauche
  * @return cell
  */
-const cell & cell::getLeftCell(){
+cell* cell::getLeftCell(){
     return leftCell;
 }
 
@@ -35,7 +31,7 @@ const cell & cell::getLeftCell(){
  * @brief getteur celulle du haut
  * @return cell
  */
-const cell & cell::getUpCell(){
+cell* cell::getUpCell(){
     return upCell;
 }
 
@@ -43,7 +39,7 @@ const cell & cell::getUpCell(){
  * @brief getteur celulle de droite
  * @return cell
  */
-const cell & cell::getRightCell(){
+cell* cell::getRightCell(){
     return rightCell;
 }
 
@@ -51,8 +47,22 @@ const cell & cell::getRightCell(){
  * @brief getteur de celulle du bas
  * @return cell
  */
-const cell & cell::getDownCell(){
+cell* cell::getDownCell(){
     return downCell;
+}
+
+/**
+ * @brief Retourne la cellule suivant de l'actuelle
+ * @return cell ou NULL Cellule Suivante
+ */
+cell* cell::getNextCell(){
+    if(rightCell != NULL){
+        return rightCell;
+    }else if(downCell != NULL){
+        return downCell;
+    }else{
+        return NULL;
+    }
 }
 
 /**
@@ -63,7 +73,7 @@ int cell::getId(){
     return id;
 }
 
-void cell::setNeighborhood(const cell& left, const cell& up, const cell& right,const cell& down) {
+void cell::setNeighborhood(cell* left, cell* up, cell* right, cell* down) {
     setUpCell(up);
     setDownCell(down);
     setLeftCell(left);
@@ -75,7 +85,7 @@ void cell::setNeighborhood(const cell& left, const cell& up, const cell& right,c
  * @brief Attribut une celulle à sa gauche
  * @param left cellule de gauche
  */
-void cell::setLeftCell(const cell& left){
+void cell::setLeftCell(cell* left){
     leftCell = left;
 }
 
@@ -83,7 +93,7 @@ void cell::setLeftCell(const cell& left){
  * @brief Attribut une celulle au dessus
  * @param up celulle du dessus
  */
-void cell::setUpCell(const cell& up){
+void cell::setUpCell(cell* up){
     upCell = up;
 }
 
@@ -91,7 +101,7 @@ void cell::setUpCell(const cell& up){
  * @brief Attribut une celulle à sa droite
  * @param right celulle de droite
  */
-void cell::setRightCell(const cell& right){
+void cell::setRightCell(cell* right){
     rightCell = right;
 }
 
@@ -99,7 +109,7 @@ void cell::setRightCell(const cell& right){
  * @brief Attribut une cellule au dessous
  * @param down celulle du dessous
  */
-void cell::setDownCell(const cell& down){
+void cell::setDownCell(cell* down){
     downCell = down;
 }
 
