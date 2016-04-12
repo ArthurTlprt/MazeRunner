@@ -51,6 +51,7 @@ void maze::printIds(){
 }
 
 void maze::initCells(){
+    //  Crée toutes les cellules et les sauvegarde dans un vector
     for(int i = 0; i < height; ++i){
         std::vector<cell> line;
         for(int j = 0; j < width; ++j){
@@ -61,7 +62,7 @@ void maze::initCells(){
         }
         this->cells.push_back(line);
     }
-
+    // Lie la cellule à ses celulles voisines
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
             cell *up = NULL, *down = NULL, *left = NULL, *right = NULL;
@@ -81,15 +82,11 @@ void maze::initCells(){
         }
     }
 
-    int len = (width+1)*height + (height+1)*width;      // nombre de separateurs
-    // create all dividers and store them in a vector
-    for(int i = 0; i < len; ++i){
-        //this->dividers.push_back(1);
-        //std::cout << this->dividers[i] << std::endl;
+    // obliger sinon bug lors de l'initialisation de la premiere cellule
+    for(int i = 0; i < 4; ++i){
+        this->dividers.push_back(1);
     }
-
-
-
+    // create all dividers and store them in a vector
     std::vector<int>::iterator it = this->dividers.begin();
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
@@ -152,9 +149,6 @@ void maze::initCells(){
                 }
             }
         }
-    }
-    for(it = this->dividers.begin(); it != this->dividers.end(); it++){
-        std::cout << *it << std::endl;
     }
 }
 
