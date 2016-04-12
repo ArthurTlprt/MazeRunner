@@ -156,6 +156,14 @@ int* cell::getDividerDown(){
     return dividerDown;
 }
 
+void cell::debug(){
+    std::cout << "id:           " << this->getId() << std::endl;
+    std::cout << "div left      " << *(this->getDividerLeft()) << std::endl;
+    std::cout << "div Up        " << *(this->getDividerUp()) << std::endl;
+    std::cout << "div Right     " << *(this->getDividerRight()) << std::endl;
+    std::cout << "div Down      " << *(this->getDividerDown()) << std::endl;
+}
+
 cell::~cell(){
 
 }

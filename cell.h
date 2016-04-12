@@ -31,6 +31,7 @@ public:
     int* getDividerRight();
     int* getDividerDown();
     void setId(int id);
+    void debug();
 private:
     // ref vers cellule voisine, NULL si la cell donne sur un mur
     cell* leftCell;

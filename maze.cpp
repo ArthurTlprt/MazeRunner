@@ -23,10 +23,6 @@ maze::maze(int width, int height){
     this->initCells();
 }
 
-/**
- *  @brief affiche le labyrinthe avec ses murs
- *  @return void
- */
 void maze::print(){
     int cnt;
     for(std::vector<cell>&i:this->cells){
@@ -46,10 +42,6 @@ void maze::print(){
     std::cout << "+" << std::endl;
 }
 
-/**
- *  @brief affiche les ids de chaque cellule du labyrinthe
- *  @return void
- */
 void maze::printIds(){
     for(std::vector<cell>&i:this->cells){
         for(cell&j:i){
@@ -58,12 +50,7 @@ void maze::printIds(){
     }
 }
 
-/**
- *  @brief crée chaque cellule du labyrinthe et initialise ses voisins et ses cloisons
- *  @return void
- */
 void maze::initCells(){
-    //  crée les cellules et les sauvegarde dans un vector
     for(int i = 0; i < height; ++i){
         std::vector<cell> line;
         for(int j = 0; j < width; ++j){
@@ -74,8 +61,6 @@ void maze::initCells(){
         }
         this->cells.push_back(line);
     }
-
-    // initialise les cellules voisines
 
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
@@ -98,7 +83,20 @@ void maze::initCells(){
 
     int len = (width+1)*height + (height+1)*width;      // nombre de separateurs
     // create all dividers and store them in a vector
+    for(int i = 0; i < len; ++i){
+        this->dividers.push_back(1);
+        //std::cout << this->dividers[i] << std::endl;
+    }
 
+
+
+    std::vector<int>::iterator it = this->dividers.begin();
+/**
+    for(it = this->dividers.begin(); it != this->dividers.end(); it++){
+        std::cout << *it << std::endl;
+    }
+ */
+    //this->cells[0][0].setDividerLeft(&(*it));
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
             if( i == 0){
@@ -108,19 +106,19 @@ void maze::initCells(){
                     this->dividers.push_back(up);
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers( &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)), &(*(this->dividers.end())) );
+                    this->cells[i][j].setDividers( &(*(this->dividers.end()-4)), &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
                 }else if(j == width -1){
                     int up = -1, right = -1, down = 1;
                     this->dividers.push_back(up);
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers( this->cells[i][j-1].getDividerRight(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)), &(*(this->dividers.end())) );
+                    this->cells[i][j].setDividers( this->cells[i][j-1].getDividerRight(), &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
                 }else{
                     int up = -1, right = 1, down = 1;
                     this->dividers.push_back(up);
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)), &(*(this->dividers.end())));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
                 }
             }else if(i == height-1){
                 if(j == 0){
@@ -128,17 +126,17 @@ void maze::initCells(){
                     this->dividers.push_back(left);
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(&(*(this->dividers.end()-2)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-1)), &(*(this->dividers.end())));
+                    this->cells[i][j].setDividers(&(*(this->dividers.end()-3)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
                 }else if(j == width -1){
                     int right = -1, down = -1;
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-1)), &(*(this->dividers.end()-2)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-3)));
                 }else{
                     int right = 1, down = -1;
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end())), &(*(this->dividers.end()-1)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-1)), &(*(this->dividers.end()-2)));
                 }
             }else{
                 if(j == 0){
@@ -146,33 +144,26 @@ void maze::initCells(){
                     this->dividers.push_back(left);
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(&(*(this->dividers.end()-2)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-1)), &(*(this->dividers.end())) );
+                    this->cells[i][j].setDividers(&(*(this->dividers.end()-3)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
                 }else if(j == width -1){
                     int right = -1, down = 1;
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-1)), &(*(this->dividers.end())) );
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
                 }else{
                     int right = 1, down = 1;
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerUp(), &(*(this->dividers.end()-1)), &(*(this->dividers.end())) );
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
                 }
             }
         }
     }
-    std::vector<int>::iterator it = this->dividers.begin();
     for(it = this->dividers.begin(); it != this->dividers.end(); it++){
-        //std::cout << *it << std::endl;
+        std::cout << *it << std::endl;
     }
 }
 
-/**
- * [maze::getCell description]
- * @param  x [description]
- * @param  y [description]
- * @return   [description]
- */
 cell maze::getCell(int x, int y){
     return cells[y][x];
 }

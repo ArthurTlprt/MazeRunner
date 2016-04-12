@@ -23,10 +23,10 @@ public:
     void print();
     void printIds();
     cell getCell(int x, int y);
+    std::vector<int >dividers;
+    std::vector<std::vector<cell> > cells;
 private:
     void initCells();
-    std::vector<std::vector<cell> > cells;
-    std::vector<int >dividers;
     int width;
     int height;
 };

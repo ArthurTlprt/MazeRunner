@@ -28,10 +28,10 @@ int main(int argc, char **argv)
     //  display all ids
 
     //lab.printIds();
-    cell cellule = lab.getCell(0, 0);
-    std::cout << *(cellule.getDividerLeft()) << std::endl;
-    if(*(cellule.getDividerLeft()) == 1){
-        std::cout << "nous on veut des nichons" << std::endl;
+    for(std::vector<cell>&line: lab.cells){
+        for(cell&item: line){
+            item.debug();
+        }
     }
 
     return 0;
