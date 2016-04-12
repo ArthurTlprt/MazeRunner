@@ -27,6 +27,8 @@ public:
     std::vector<std::vector<cell> > cells;
 private:
     void initCells();
+    void printHori(int d);
+    void printVert(int d);
     int width;
     int height;
 };

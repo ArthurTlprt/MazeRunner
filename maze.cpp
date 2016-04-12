@@ -23,7 +23,36 @@ maze::maze(int width, int height){
     this->initCells();
 }
 
+void maze::printHori(int d){
+    switch (d) {
+       case 1:
+           std::cout << "+--";
+           break;
+       case -1:
+           std::cout << "+--";
+           break;
+       case 0:
+           std::cout << "+ #";
+           break;
+    }
+}
+
+void maze::printVert(int d){
+    switch (d) {
+         case 1:
+            std::cout << "|";
+            break;
+        case -1:
+           std::cout << "|";
+           break;
+         case 0:
+            std::cout << " ";
+            break;
+    }
+}
+
 void maze::print(){
+    /**
     int cnt;
     for(std::vector<cell>&i:this->cells){
         cnt=0;
@@ -40,6 +69,41 @@ void maze::print(){
     }
     printNtimes("+--", width);
     std::cout << "+" << std::endl;
+     */
+
+    for(int line = 0; line < this->height; ++line){
+
+        for(int col = 0; col < this->width; ++col){
+            this->printHori(*(this->cells[line][col].getDividerUp()));
+            if(col == this->width-1){
+                std::cout << "+";
+            }
+        }
+        std::cout << std::endl;
+
+        for(int col = 0; col < this->width; ++col){
+            this->printVert(*(this->cells[line][col].getDividerRight()));
+            if(this->cells[line][col].isMarked()){
+                std::cout << "##";
+            }else{
+                std::cout << "  ";
+            }
+            if(col == this->width-1){
+                this->printVert(*(this->cells[line][col].getDividerLeft()));
+            }
+        }
+        std::cout << std::endl;
+        if(line == this->height-1){
+            for(int col = 0; col < this->width; ++col){
+                this->printHori(*(this->cells[line][col].getDividerDown()));
+                if(col == this->width-1){
+                    std::cout << "+";
+                }
+            }
+        }
+    }
+    std::cout << std::endl << std::endl;
+
 }
 
 void maze::printIds(){

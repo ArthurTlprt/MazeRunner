@@ -32,6 +32,8 @@ public:
     int* getDividerDown();
     void setId(int id);
     void debug();
+    void setMark(bool b);
+    bool isMarked();
 private:
     // ref vers cellule voisine, NULL si la cell donne sur un mur
     cell* leftCell;
@@ -42,7 +44,7 @@ private:
     int x;
     int y;
     int id;
-    int marked;
+    bool marked;
     /**
      *  si la cellule done sur:
      *  - un mur = -1

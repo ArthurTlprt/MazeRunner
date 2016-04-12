@@ -28,11 +28,15 @@ int main(int argc, char **argv)
     //  display all ids
 
     //lab.printIds();
+
+    /**
     for(std::vector<cell>&line: lab.cells){
         for(cell&item: line){
             item.debug();
         }
     }
+     *
+     */
 
     return 0;
 }

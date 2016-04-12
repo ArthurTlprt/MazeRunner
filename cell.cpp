@@ -7,17 +7,22 @@ cell::cell()
 }
 
 cell::cell(int x, int y) {
-
+    this->setMark(false);
 }
 
 cell::cell(cell* left, cell* up, cell* right, cell* down) {
-
+    this->setLeftCell(left);
+    this->setLeftCell(up);
+    this->setLeftCell(right);
+    this->setLeftCell(down);
+    this->setMark(false);
 }
 
 
 cell::cell(int id){
     this->id = id;
     std::clog << "LOG : cell number : " << this->id << " created." << std::endl;
+    this->setMark(false);
 }
 /**
  * @brief getteur celulle de gauche
@@ -162,6 +167,14 @@ void cell::debug(){
     std::cout << "div Up        " << *(this->getDividerUp()) << std::endl;
     std::cout << "div Right     " << *(this->getDividerRight()) << std::endl;
     std::cout << "div Down      " << *(this->getDividerDown()) << std::endl;
+}
+
+void cell::setMark(bool b){
+    this->marked = b;
+}
+
+bool cell::isMarked(){
+    return this->marked;
 }
 
 cell::~cell(){
