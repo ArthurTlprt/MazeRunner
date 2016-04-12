@@ -84,19 +84,13 @@ void maze::initCells(){
     int len = (width+1)*height + (height+1)*width;      // nombre de separateurs
     // create all dividers and store them in a vector
     for(int i = 0; i < len; ++i){
-        this->dividers.push_back(1);
+        //this->dividers.push_back(1);
         //std::cout << this->dividers[i] << std::endl;
     }
 
 
 
     std::vector<int>::iterator it = this->dividers.begin();
-/**
-    for(it = this->dividers.begin(); it != this->dividers.end(); it++){
-        std::cout << *it << std::endl;
-    }
- */
-    //this->cells[0][0].setDividerLeft(&(*it));
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
             if( i == 0){
