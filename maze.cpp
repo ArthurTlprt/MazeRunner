@@ -21,6 +21,7 @@ maze::maze(int width, int height){
     this->width = width;
     this->height = height;
     this->initCells();
+    this->generate();
 }
 
 void maze::printHori(int d){
@@ -52,25 +53,6 @@ void maze::printVert(int d){
 }
 
 void maze::print(){
-    /**
-    int cnt;
-    for(std::vector<cell>&i:this->cells){
-        cnt=0;
-        for(cell&j:i){
-            if(cnt == 0){
-                printNtimes("+--", width);
-                std::cout << "+" << std::endl;
-            }
-            //std::cout << "|  ";
-            std::cout << "| " << j.getId();
-            cnt++;
-        }
-        std::cout << "|  " << std::endl;
-    }
-    printNtimes("+--", width);
-    std::cout << "+" << std::endl;
-     */
-
     for(int line = 0; line < this->height; ++line){
 
         for(int col = 0; col < this->width; ++col){
@@ -82,14 +64,14 @@ void maze::print(){
         std::cout << std::endl;
 
         for(int col = 0; col < this->width; ++col){
-            this->printVert(*(this->cells[line][col].getDividerRight()));
+            this->printVert(*(this->cells[line][col].getDividerLeft()));
             if(this->cells[line][col].isMarked()){
                 std::cout << "##";
             }else{
                 std::cout << "  ";
             }
             if(col == this->width-1){
-                this->printVert(*(this->cells[line][col].getDividerLeft()));
+                this->printVert(*(this->cells[line][col].getDividerRight()));
             }
         }
         std::cout << std::endl;
@@ -156,7 +138,7 @@ void maze::initCells(){
         for(int j = 0; j < width; ++j){
             if( i == 0){
                 if(j == 0){
-                    int left = -1, up = -1, right = 1, down = 1;
+                    int left = 0, up = -1, right = 1, down = 1;
                     this->dividers.push_back(left);
                     this->dividers.push_back(up);
                     this->dividers.push_back(right);
@@ -183,10 +165,10 @@ void maze::initCells(){
                     this->dividers.push_back(down);
                     this->cells[i][j].setDividers(&(*(this->dividers.end()-3)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
                 }else if(j == width -1){
-                    int right = -1, down = -1;
+                    int right = 0, down = -1;
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-3)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
                 }else{
                     int right = 1, down = -1;
                     this->dividers.push_back(right);
@@ -218,6 +200,16 @@ void maze::initCells(){
 
 cell maze::getCell(int x, int y){
     return cells[y][x];
+}
+
+void maze::generate(){
+    std::stack<cell*> visited;
+    /**
+    visited.push(this->cells[0][0]);
+    srand(time(NULL));
+    int way = rand() % 3;
+    std::cout << way << std::endl;
+     */
 }
 
 maze::maze(const maze& orig) {

@@ -13,6 +13,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <stack>
+#include <time.h>
 
 class maze {
 public:
@@ -29,6 +31,7 @@ private:
     void initCells();
     void printHori(int d);
     void printVert(int d);
+    void generate();
     int width;
     int height;
 };

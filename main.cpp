@@ -16,6 +16,7 @@ int main(int argc, char **argv)
     std::cin >> width;
     std::cout << "Setting the height" << std::endl;
     std::cin >> height;
+    std::cout << std::endl << std::endl;
 
     // setting up a maze
 
