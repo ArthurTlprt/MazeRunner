@@ -8,6 +8,17 @@
 
 #include "maze.h"
 
+//utils
+
+std::vector<int> indexes(cell* tab[], int len){
+    std::vector<int> v;
+    for(int i = 0; i < len; ++i){
+        if(tab[i] != NULL)
+            v.push_back(i);
+    }
+    return v;
+}
+
 void printNtimes(std::string str, int n){
     for(int i = 0; i < n; ++i){
         std::cout << str;
@@ -21,7 +32,7 @@ maze::maze(int width, int height){
     this->width = width;
     this->height = height;
     this->initCells();
-    this->generate(0, 0);
+    this->generate(this->cells[0][0]);
 }
 
 void maze::printHori(int d){
@@ -202,40 +213,54 @@ cell maze::getCell(int x, int y){
     return cells[y][x];
 }
 
-void maze::generate(int i, int j){
+void maze::generate(cell c){
     if(this->visited.size() != this->width * this->height){
-        this->cells[i][j].setMark(true);
-        this->visited.push(this->cells[i][j]);
-        if(
-            (*(this->cells[i][j].getDividerLeft()) == -1 || this->cells[i][j].getLeftCell()->isMarked() == true) &&
-            ( *(this->cells[i][j].getDividerUp()) == -1 || this->cells[i][j].getUpCell()->isMarked() == true) &&
-            ( *(this->cells[i][j].getDividerRight()) == -1 || this->cells[i][j].getRightCell()->isMarked() == true) &&
-            ( *(this->cells[i][j].getDividerDown()) == -1 || this->cells[i][j].getDownCell()->isMarked() == true)
-        ){
-            //  on re-cule
-            return;
-        }else{
-            // on a-vance, mais pas n'importe ou...
+        c.setMark(true);
+        this->visited.push(c);
+
+        cell* tab[4] = {NULL, NULL, NULL, NULL};
+        if(*(c.getDividerLeft()) == 1){
+            if(c.getLeftCell()->isMarked() == false){
+                tab[0] = &(*(c.getLeftCell()));
+            }
+        }
+        if(*(c.getDividerUp()) == 1){
+            if(c.getUpCell()->isMarked() == false){
+                tab[1] = &(*(c.getUpCell()));
+            }
+        }
+        if(*(c.getDividerRight()) == 1){
+            if(c.getRightCell()->isMarked() == false){
+                tab[2] = &(*(c.getRightCell()));
+            }
+        }
+        if(*(c.getDividerDown()) == 1){
+            if(c.getDownCell()->isMarked() == false){
+                tab[3] = &(*(c.getDownCell()));
+            }
+        }
+        std::vector<int> v = indexes(tab, 4);
+         if(v.size() > 0){
             int way;
-            do {
-                srand(time(NULL));
-                way = rand() % 4;
-                if(way == 0 && !(*(this->cells[i][j].getDividerLeft()) == -1 || this->cells[i][j].getLeftCell()->isMarked() == true) ){
-                    *(this->cells[i][j].getDividerLeft()) = 0;
-                    this->generate(i, j-1);
-                }else if(way == 1 && !(*(this->cells[i][j].getDividerUp()) == -1 || this->cells[i][j].getUpCell()->isMarked() == true) ){
-                    *(this->cells[i][j].getDividerUp()) = 0;
-                    this->generate(i-1, j);
-                }else if(way == 2 && !(*(this->cells[i][j].getDividerRight()) == -1 || this->cells[i][j].getRightCell()->isMarked() == true) ){
-                    *(this->cells[i][j].getDividerRight()) = 0;
-                    this->generate(i, j+1);
-                }else if(way == 3 && !(*(this->cells[i][j].getDividerDown()) == -1 || this->cells[i][j].getDownCell()->isMarked() == true) ){
-                    *(this->cells[i][j].getDividerDown()) = 0;
-                    this->generate(i+1, j);
-                }
-            } while(1);
-            std::cout << way << std::endl;
-            this->print();
+
+            srand(time(NULL));
+            way = rand() % v.size();
+            switch (way) {
+                case 0:
+                    this->generate(*(c.getLeftCell()));
+                    break;
+                case 1:
+                    this->generate(*(c.getUpCell()));
+                    break;
+                case 2:
+                    this->generate(*(c.getRightCell()));
+                    break;
+                case 3:
+                    this->generate(*(c.getDownCell()));
+                    break;
+            }
+        }else{
+            std::cout << "on recuuuuule" << std::endl;
         }
     }
 }

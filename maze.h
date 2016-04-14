@@ -32,7 +32,7 @@ private:
     void initCells();
     void printHori(int d);
     void printVert(int d);
-    void generate(int i, int j);
+    void generate(cell);
     int width;
     int height;
 };

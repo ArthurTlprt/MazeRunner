@@ -30,14 +30,12 @@ int main(int argc, char **argv)
 
     //lab.printIds();
 
-    /**
+
     for(std::vector<cell>&line: lab.cells){
         for(cell&item: line){
             item.debug();
         }
     }
-     *
-     */
 
     return 0;
 }
