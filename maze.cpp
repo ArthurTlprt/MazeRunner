@@ -21,7 +21,7 @@ maze::maze(int width, int height){
     this->width = width;
     this->height = height;
     this->initCells();
-    this->generate();
+    this->generate(0, 0);
 }
 
 void maze::printHori(int d){
@@ -202,14 +202,42 @@ cell maze::getCell(int x, int y){
     return cells[y][x];
 }
 
-void maze::generate(){
-    std::stack<cell*> visited;
-    /**
-    visited.push(this->cells[0][0]);
-    srand(time(NULL));
-    int way = rand() % 3;
-    std::cout << way << std::endl;
-     */
+void maze::generate(int i, int j){
+    if(this->visited.size() != this->width * this->height){
+        this->cells[i][j].setMark(true);
+        this->visited.push(this->cells[i][j]);
+        if(
+            (*(this->cells[i][j].getDividerLeft()) == -1 || this->cells[i][j].getLeftCell()->isMarked() == true) &&
+            ( *(this->cells[i][j].getDividerUp()) == -1 || this->cells[i][j].getUpCell()->isMarked() == true) &&
+            ( *(this->cells[i][j].getDividerRight()) == -1 || this->cells[i][j].getRightCell()->isMarked() == true) &&
+            ( *(this->cells[i][j].getDividerDown()) == -1 || this->cells[i][j].getDownCell()->isMarked() == true)
+        ){
+            //  on re-cule
+            return;
+        }else{
+            // on a-vance, mais pas n'importe ou...
+            int way;
+            do {
+                srand(time(NULL));
+                way = rand() % 4;
+                if(way == 0 && !(*(this->cells[i][j].getDividerLeft()) == -1 || this->cells[i][j].getLeftCell()->isMarked() == true) ){
+                    *(this->cells[i][j].getDividerLeft()) = 0;
+                    this->generate(i, j-1);
+                }else if(way == 1 && !(*(this->cells[i][j].getDividerUp()) == -1 || this->cells[i][j].getUpCell()->isMarked() == true) ){
+                    *(this->cells[i][j].getDividerUp()) = 0;
+                    this->generate(i-1, j);
+                }else if(way == 2 && !(*(this->cells[i][j].getDividerRight()) == -1 || this->cells[i][j].getRightCell()->isMarked() == true) ){
+                    *(this->cells[i][j].getDividerRight()) = 0;
+                    this->generate(i, j+1);
+                }else if(way == 3 && !(*(this->cells[i][j].getDividerDown()) == -1 || this->cells[i][j].getDownCell()->isMarked() == true) ){
+                    *(this->cells[i][j].getDividerDown()) = 0;
+                    this->generate(i+1, j);
+                }
+            } while(1);
+            std::cout << way << std::endl;
+            this->print();
+        }
+    }
 }
 
 maze::maze(const maze& orig) {

@@ -27,11 +27,12 @@ public:
     cell getCell(int x, int y);
     std::vector<int >dividers;
     std::vector<std::vector<cell> > cells;
+    std::stack<cell> visited;
 private:
     void initCells();
     void printHori(int d);
     void printVert(int d);
-    void generate();
+    void generate(int i, int j);
     int width;
     int height;
 };
