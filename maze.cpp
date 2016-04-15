@@ -32,6 +32,7 @@ maze::maze(int width, int height){
     this->width = width;
     this->height = height;
     this->initCells();
+    srand(time(NULL));
     this->generate(this->cells[0][0]);
 }
 
@@ -213,7 +214,8 @@ cell maze::getCell(int x, int y){
     return cells[y][x];
 }
 
-void maze::generate(cell c){
+void maze::generate(cell& c){
+    this->print();
     if(this->visited.size() != this->width * this->height){
         c.setMark(true);
         this->visited.push(c);
@@ -243,22 +245,27 @@ void maze::generate(cell c){
          if(v.size() > 0){
             int way;
 
-            srand(time(NULL));
             way = rand() % v.size();
-            switch (way) {
+
+            switch (v[way]) {
                 case 0:
+                    std::cout << "this->generate(*(c.getLeftCell()))" << std::endl;
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
+                    std::cout << "this->generate(*(c.getUpCell()))" << std::endl;
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
+                    std::cout << "this->generate(*(c.getRightCell()))" << std::endl;
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
+                    std::cout << "this->generate(*(c.getDownCell()))" << std::endl;
                     this->generate(*(c.getDownCell()));
                     break;
             }
+
         }else{
             std::cout << "on recuuuuule" << std::endl;
         }

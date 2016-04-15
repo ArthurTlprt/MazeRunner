@@ -14,7 +14,8 @@
 #include <string>
 #include <algorithm>
 #include <stack>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
 class maze {
 public:
@@ -32,7 +33,7 @@ private:
     void initCells();
     void printHori(int d);
     void printVert(int d);
-    void generate(cell);
+    void generate(cell&);
     int width;
     int height;
 };
