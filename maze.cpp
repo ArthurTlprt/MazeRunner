@@ -45,7 +45,7 @@ void maze::printHori(int d){
            std::cout << "+--";
            break;
        case 0:
-           std::cout << "+ #";
+           std::cout << "+##";
            break;
     }
 }
@@ -185,7 +185,7 @@ void maze::initCells(){
                     int right = 1, down = -1;
                     this->dividers.push_back(right);
                     this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-1)), &(*(this->dividers.end()-2)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
                 }
             }else{
                 if(j == 0){
@@ -215,59 +215,74 @@ cell maze::getCell(int x, int y){
 }
 
 void maze::generate(cell& c){
-    this->print();
+    std::cout << "generate()" << std::endl;
     if(this->visited.size() != this->width * this->height){
         c.setMark(true);
-        this->visited.push(c);
-
+        this->visited.insert(c);
         cell* tab[4] = {NULL, NULL, NULL, NULL};
         if(*(c.getDividerLeft()) == 1){
             if(c.getLeftCell()->isMarked() == false){
-                tab[0] = &(*(c.getLeftCell()));
+                std::cout << "tab[0]" << std::endl;
+                tab[0] = c.getLeftCell();
             }
         }
         if(*(c.getDividerUp()) == 1){
             if(c.getUpCell()->isMarked() == false){
-                tab[1] = &(*(c.getUpCell()));
+                std::cout << "tab[1]" << std::endl;
+                tab[1] = c.getUpCell();
             }
         }
         if(*(c.getDividerRight()) == 1){
             if(c.getRightCell()->isMarked() == false){
-                tab[2] = &(*(c.getRightCell()));
+                std::cout << "tab[2]" << std::endl;
+                tab[2] = c.getRightCell();
             }
         }
         if(*(c.getDividerDown()) == 1){
             if(c.getDownCell()->isMarked() == false){
-                tab[3] = &(*(c.getDownCell()));
+                std::cout << "tab[3]" << std::endl;
+                tab[3] = c.getDownCell();
             }
         }
+        this->print();
         std::vector<int> v = indexes(tab, 4);
          if(v.size() > 0){
-            int way;
+            int way = 4;
 
             way = rand() % v.size();
-
+            std::cout << v[way] << std::endl;
             switch (v[way]) {
                 case 0:
-                    std::cout << "this->generate(*(c.getLeftCell()))" << std::endl;
+                    std::cout << "left" << std::endl;
+                    *(c.getDividerLeft()) = 0;
+                    this->antecedent.push(c);
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
-                    std::cout << "this->generate(*(c.getUpCell()))" << std::endl;
+                    std::cout << "up" << std::endl;
+                    *(c.getDividerUp()) = 0;
+                    this->antecedent.push(c);
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
-                    std::cout << "this->generate(*(c.getRightCell()))" << std::endl;
+                    std::cout << "right" << std::endl;
+                    *(c.getDividerRight()) = 0;
+                    this->antecedent.push(c);
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
-                    std::cout << "this->generate(*(c.getDownCell()))" << std::endl;
+                    std::cout << "down" << std::endl;
+                    *(c.getDividerDown()) = 0;
+                    this->antecedent.push(c);
                     this->generate(*(c.getDownCell()));
                     break;
             }
 
         }else{
             std::cout << "on recuuuuule" << std::endl;
+            cell& last = this->antecedent.top();
+            this->antecedent.pop();
+            this->generate(last);
         }
     }
 }

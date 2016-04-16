@@ -16,6 +16,7 @@
 #include <stack>
 #include <cstdlib>
 #include <ctime>
+#include <set>
 
 class maze {
 public:
@@ -28,7 +29,8 @@ public:
     cell getCell(int x, int y);
     std::vector<int >dividers;
     std::vector<std::vector<cell> > cells;
-    std::stack<cell> visited;
+    std::stack<cell> antecedent;
+    std::set<cell> visited;
 private:
     void initCells();
     void printHori(int d);
