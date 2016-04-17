@@ -122,51 +122,51 @@ void cell::setId(int id) {
     this->id = id;
 }
 
-void cell::setDividerLeft(int* divLeft) {
+void cell::setDividerLeft(int divLeft) {
     this->dividerLeft = divLeft;
 }
 
-void cell::setDividerUp(int* divUp) {
+void cell::setDividerUp(int divUp) {
     this->dividerUp = divUp;
 }
 
-void cell::setDividerRight(int* divRight) {
+void cell::setDividerRight(int divRight) {
     this->dividerRight = divRight;
 }
 
-void cell::setDividerDown(int* divDown) {
+void cell::setDividerDown(int divDown) {
     this->dividerDown = divDown;
 }
 
-void cell::setDividers(int *divLeft, int *divUp, int *divRight, int *divDown){
+void cell::setDividers(int divLeft, int divUp, int divRight, int divDown){
     cell::setDividerLeft(divLeft);
     cell::setDividerRight(divRight);
     cell::setDividerUp(divUp);
     cell::setDividerDown(divDown);
 }
 
-int* cell::getDividerLeft(){
+int cell::getDividerLeft(){
     return dividerLeft;
 }
 
-int* cell::getDividerUp(){
+int cell::getDividerUp(){
     return dividerUp;
 }
 
-int* cell::getDividerRight(){
+int cell::getDividerRight(){
     return dividerRight;
 }
 
-int* cell::getDividerDown(){
+int cell::getDividerDown(){
     return dividerDown;
 }
 
 void cell::debug(){
     std::cout << "id:           " << this->getId() << std::endl;
-    std::cout << "div left      " << *(this->getDividerLeft()) << std::endl;
-    std::cout << "div Up        " << *(this->getDividerUp()) << std::endl;
-    std::cout << "div Right     " << *(this->getDividerRight()) << std::endl;
-    std::cout << "div Down      " << *(this->getDividerDown()) << std::endl;
+    std::cout << "div left      " << this->getDividerLeft() << std::endl;
+    std::cout << "div Up        " << this->getDividerUp() << std::endl;
+    std::cout << "div Right     " << this->getDividerRight() << std::endl;
+    std::cout << "div Down      " << this->getDividerDown() << std::endl;
 }
 
 void cell::setMark(bool b){

@@ -33,7 +33,6 @@ maze::maze(int width, int height){
     this->height = height;
     this->initCells();
     srand(time(NULL));
-    //this->visited.insert(this->cells[0][0].getId());
     //this->generate(this->cells[0][0]);
 }
 
@@ -69,7 +68,7 @@ void maze::print(){
     for(int line = 0; line < this->height; ++line){
 
         for(int col = 0; col < this->width; ++col){
-            this->printHori(*(this->cells[line][col].getDividerUp()));
+            this->printHori((this->cells[line][col].getDividerUp()));
             if(col == this->width-1){
                 std::cout << "+";
             }
@@ -77,20 +76,20 @@ void maze::print(){
         std::cout << std::endl;
 
         for(int col = 0; col < this->width; ++col){
-            this->printVert(*(this->cells[line][col].getDividerLeft()));
+            this->printVert((this->cells[line][col].getDividerLeft()));
             if(this->cells[line][col].isMarked()){
                 std::cout << "##";
             }else{
                 std::cout << "  ";
             }
             if(col == this->width-1){
-                this->printVert(*(this->cells[line][col].getDividerRight()));
+                this->printVert((this->cells[line][col].getDividerRight()));
             }
         }
         std::cout << std::endl;
         if(line == this->height-1){
             for(int col = 0; col < this->width; ++col){
-                this->printHori(*(this->cells[line][col].getDividerDown()));
+                this->printHori((this->cells[line][col].getDividerDown()));
                 if(col == this->width-1){
                     std::cout << "+";
                 }
@@ -134,70 +133,41 @@ void maze::initCells(){
         }
     }
 
-    // obliger sinon bug lors de l'initialisation de la premiere cellule
-    for(int i = 0; i < 4; ++i){
-        this->dividers.push_back(1);
-    }
     // create all dividers and store them in a vector
-    std::vector<int>::iterator it = this->dividers.begin();
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
             if( i == 0){
                 if(j == 0){
                     int left = 0, up = -1, right = 1, down = 1;
-                    this->dividers.push_back(left);
-                    this->dividers.push_back(up);
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers( &(*(this->dividers.end()-4)), &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
+                    this->cells[i][j].setDividers( left, up, right, down );
                 }else if(j == width -1){
                     int up = -1, right = -1, down = 1;
-                    this->dividers.push_back(up);
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers( this->cells[i][j-1].getDividerRight(), &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
+                    this->cells[i][j].setDividers( this->cells[i][j-1].getDividerRight(), up, right, down );
                 }else{
                     int up = -1, right = 1, down = 1;
-                    this->dividers.push_back(up);
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), &(*(this->dividers.end()-3)), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), up, right, down);
                 }
             }else if(i == height-1){
                 if(j == 0){
                     int left = -1, right = 1, down = -1;
-                    this->dividers.push_back(left);
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(&(*(this->dividers.end()-3)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
+                    this->cells[i][j].setDividers(left, this->cells[i-1][j].getDividerDown(), right, down);
                 }else if(j == width -1){
                     int right = 0, down = -1;
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), right, down);
                 }else{
                     int right = 1, down = -1;
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)));
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), right, down);
                 }
             }else{
                 if(j == 0){
                     int left = -1, right = 1, down = 1;
-                    this->dividers.push_back(left);
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(&(*(this->dividers.end()-3)), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
+                    this->cells[i][j].setDividers(left, this->cells[i-1][j].getDividerDown(), right, down );
                 }else if(j == width -1){
                     int right = -1, down = 1;
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), right, down );
                 }else{
                     int right = 1, down = 1;
-                    this->dividers.push_back(right);
-                    this->dividers.push_back(down);
-                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), &(*(this->dividers.end()-2)), &(*(this->dividers.end()-1)) );
+                    this->cells[i][j].setDividers(this->cells[i][j-1].getDividerRight(), this->cells[i-1][j].getDividerDown(), right, down );
                 }
             }
         }
@@ -209,33 +179,34 @@ cell maze::getCell(int x, int y){
 }
 
 void maze::generate(cell& c){
+    //this->debug();
     std::cout << "generate()" << std::endl;
     if(this->visited.size() != this->width * this->height){
         c.setMark(true);
-        //this->visited.insert(c.getId());  // code ne respectant pas les pointeurs sur dividers
+        this->visited.insert(c.getId());  // code ne respectant pas les pointeurs sur dividers
         cell* tab[4] = {NULL, NULL, NULL, NULL};
         // on sélectionne les cellules voisines non explorées
-        if(*(c.getDividerLeft()) == 1){
+        if(c.getDividerLeft() == 1){
             if(c.getLeftCell()->isMarked() == false){
-                std::cout << "tab[0]" << std::endl;
+                //std::cout << "tab[0]" << std::endl;
                 tab[0] = c.getLeftCell();
             }
         }
-        if(*(c.getDividerUp()) == 1){
+        if(c.getDividerUp() == 1){
             if(c.getUpCell()->isMarked() == false){
-                std::cout << "tab[1]" << std::endl;
+                //std::cout << "tab[1]" << std::endl;
                 tab[1] = c.getUpCell();
             }
         }
-        if(*(c.getDividerRight()) == 1){
+        if(c.getDividerRight() == 1){
             if(c.getRightCell()->isMarked() == false){
-                std::cout << "tab[2]" << std::endl;
+                //std::cout << "tab[2]" << std::endl;
                 tab[2] = c.getRightCell();
             }
         }
-        if(*(c.getDividerDown()) == 1){
+        if(c.getDividerDown() == 1){
             if(c.getDownCell()->isMarked() == false){
-                std::cout << "tab[3]" << std::endl;
+                //std::cout << "tab[3]" << std::endl;
                 tab[3] = c.getDownCell();
             }
         }
@@ -252,25 +223,29 @@ void maze::generate(cell& c){
             switch (v[way]) {
                 case 0:
                     std::cout << "left" << std::endl;
-                    *(c.getDividerLeft()) = 0;
+                    c.setDividerLeft(0);
+                    *(c.getLeftCell())->setDividerRight(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
                     std::cout << "up" << std::endl;
-                    *(c.getDividerUp()) = 0;
+                    c.setDividerUp(0);
+                    *(c.getUpCell())->setDividerDown(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
                     std::cout << "right" << std::endl;
-                    *(c.getDividerRight()) = 0;
+                    c.setDividerRight(0);
+                    *(c.getRightCell())->setDividerLeft(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
                     std::cout << "down" << std::endl;
-                    *(c.getDividerDown()) = 0;
+                    c.setDividerDown(0);
+                    *(c.getDownCell())->setDividerUp(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getDownCell()));
                     break;

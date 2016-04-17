@@ -27,7 +27,6 @@ public:
     void print();
     void debug();
     cell getCell(int x, int y);
-    std::vector<int >dividers;
     std::vector<std::vector<cell> > cells;
     std::stack<cell> antecedent;
     std::unordered_set<int> visited;

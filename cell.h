@@ -21,15 +21,15 @@ public:
     void setUpCell(cell* up);
     void setRightCell(cell* right);
     void setDownCell(cell* down);
-    void setDividers(int *divLeft, int *divUp, int *divRight, int *divDown);
-    void setDividerLeft(int *divLeft);
-    void setDividerUp(int *divUp);
-    void setDividerRight(int *divRight);
-    void setDividerDown(int *divDown);
-    int* getDividerLeft();
-    int* getDividerUp();
-    int* getDividerRight();
-    int* getDividerDown();
+    void setDividers(int divLeft, int divUp, int divRight, int divDown);
+    void setDividerLeft(int divLeft);
+    void setDividerUp(int divUp);
+    void setDividerRight(int divRight);
+    void setDividerDown(int divDown);
+    int getDividerLeft();
+    int getDividerUp();
+    int getDividerRight();
+    int getDividerDown();
     void setId(int id);
     void debug();
     void setMark(bool b);
@@ -51,10 +51,10 @@ private:
      *  - une cloison = 1
      *  - la cellule voisine = 0
      */
-    int* dividerLeft;
-    int* dividerUp;
-    int* dividerRight;
-    int* dividerDown;
+    int dividerLeft;
+    int dividerUp;
+    int dividerRight;
+    int dividerDown;
     // int value;
     /* Pas sur que l'on ai besoin d'une valeur si on a l'id */
 };
