@@ -91,7 +91,7 @@ void cell::setNeighborhood(cell* left, cell* up, cell* right, cell* down) {
  * @param left cellule de gauche
  */
 void cell::setLeftCell(cell* left){
-    leftCell = left;
+    this->leftCell = left;
 }
 
 /**
@@ -99,7 +99,7 @@ void cell::setLeftCell(cell* left){
  * @param up celulle du dessus
  */
 void cell::setUpCell(cell* up){
-    upCell = up;
+    this->upCell = up;
 }
 
 /**
@@ -107,7 +107,7 @@ void cell::setUpCell(cell* up){
  * @param right celulle de droite
  */
 void cell::setRightCell(cell* right){
-    rightCell = right;
+    this->rightCell = right;
 }
 
 /**

@@ -33,7 +33,8 @@ maze::maze(int width, int height){
     this->height = height;
     this->initCells();
     srand(time(NULL));
-    this->generate(this->cells[0][0]);
+    //this->visited.insert(this->cells[0][0].getId());
+    //this->generate(this->cells[0][0]);
 }
 
 void maze::printHori(int d){
@@ -100,13 +101,6 @@ void maze::print(){
 
 }
 
-void maze::printIds(){
-    for(std::vector<cell>&i:this->cells){
-        for(cell&j:i){
-            std::cout << j.getId() << std::endl;
-        }
-    }
-}
 
 void maze::initCells(){
     //  Crée toutes les cellules et les sauvegarde dans un vector
@@ -218,8 +212,9 @@ void maze::generate(cell& c){
     std::cout << "generate()" << std::endl;
     if(this->visited.size() != this->width * this->height){
         c.setMark(true);
-        this->visited.insert(c);
+        //this->visited.insert(c.getId());  // code ne respectant pas les pointeurs sur dividers
         cell* tab[4] = {NULL, NULL, NULL, NULL};
+        // on sélectionne les cellules voisines non explorées
         if(*(c.getDividerLeft()) == 1){
             if(c.getLeftCell()->isMarked() == false){
                 std::cout << "tab[0]" << std::endl;
@@ -246,11 +241,14 @@ void maze::generate(cell& c){
         }
         this->print();
         std::vector<int> v = indexes(tab, 4);
+        // si il y a au moins un cellule voisine disponible...
          if(v.size() > 0){
             int way = 4;
-
+            // on tire au sort parmis les cellules inexplorées voisines
             way = rand() % v.size();
             std::cout << v[way] << std::endl;
+            // on casse la cloison séparant les deux cellules
+            //  et on rappelle la fonction avec en parametre la cellule voisine choisie
             switch (v[way]) {
                 case 0:
                     std::cout << "left" << std::endl;
@@ -276,13 +274,23 @@ void maze::generate(cell& c){
                     this->antecedent.push(c);
                     this->generate(*(c.getDownCell()));
                     break;
+                default:
+                    return;
             }
 
         }else{
+            // si pas de cellule voisine inexplorée on recule
             std::cout << "on recuuuuule" << std::endl;
-            cell& last = this->antecedent.top();
             this->antecedent.pop();
-            this->generate(last);
+            this->generate(this->antecedent.top());
+        }
+    }
+}
+
+void maze::debug(){
+    for(std::vector<cell>&line: this->cells){
+        for(cell&item: line){
+            item.debug();
         }
     }
 }

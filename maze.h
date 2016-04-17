@@ -16,7 +16,7 @@
 #include <stack>
 #include <cstdlib>
 #include <ctime>
-#include <set>
+#include <unordered_set>
 
 class maze {
 public:
@@ -25,17 +25,17 @@ public:
     maze(const maze& orig);
     virtual ~maze();
     void print();
-    void printIds();
+    void debug();
     cell getCell(int x, int y);
     std::vector<int >dividers;
     std::vector<std::vector<cell> > cells;
     std::stack<cell> antecedent;
-    std::set<cell> visited;
+    std::unordered_set<int> visited;
+    void generate(cell&);
 private:
     void initCells();
     void printHori(int d);
     void printVert(int d);
-    void generate(cell&);
     int width;
     int height;
 };
