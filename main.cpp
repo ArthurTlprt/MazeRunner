@@ -1,14 +1,18 @@
 
 #include "cell.h"
 #include "maze.h"
+#include "json.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
 
+using json = nlohmann::json;
 
 int main(int argc, char **argv)
 {
 
+    json j;
+    
     // input maze sizes
 
     int width, height;
