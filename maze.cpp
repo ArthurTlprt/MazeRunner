@@ -182,7 +182,7 @@ void maze::generate(cell& c){
     //this->debug();
     std::cout << "generate()" << std::endl;
     if(this->visited.size() != this->width * this->height){
-        c.setMark(true);
+        /*c.setMark(true);
         this->visited.insert(c.getId());  // code ne respectant pas les pointeurs sur dividers
         cell* tab[4] = {NULL, NULL, NULL, NULL};
         // on sélectionne les cellules voisines non explorées
@@ -212,8 +212,9 @@ void maze::generate(cell& c){
         }
         this->print();
         std::vector<int> v = indexes(tab, 4);
+        */
         // si il y a au moins un cellule voisine disponible...
-         if(v.size() > 0){
+         if(v.size() > 0){/*
             int way = 4;
             // on tire au sort parmis les cellules inexplorées voisines
             way = rand() % v.size();
@@ -224,35 +225,35 @@ void maze::generate(cell& c){
                 case 0:
                     std::cout << "left" << std::endl;
                     c.setDividerLeft(0);
-                    *(c.getLeftCell())->setDividerRight(0);
+                    (c.getLeftCell())->setDividerRight(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
                     std::cout << "up" << std::endl;
                     c.setDividerUp(0);
-                    *(c.getUpCell())->setDividerDown(0);
+                    (c.getUpCell())->setDividerDown(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
                     std::cout << "right" << std::endl;
                     c.setDividerRight(0);
-                    *(c.getRightCell())->setDividerLeft(0);
+                    (c.getRightCell())->setDividerLeft(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
                     std::cout << "down" << std::endl;
                     c.setDividerDown(0);
-                    *(c.getDownCell())->setDividerUp(0);
+                    (c.getDownCell())->setDividerUp(0);
                     this->antecedent.push(c);
                     this->generate(*(c.getDownCell()));
                     break;
                 default:
                     return;
             }
-
+            */
         }else{
             // si pas de cellule voisine inexplorée on recule
             std::cout << "on recuuuuule" << std::endl;
