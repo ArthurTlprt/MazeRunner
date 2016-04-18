@@ -29,11 +29,9 @@ int main(int argc, char **argv)
     //lab.printIds();
 
 
-    lab.generate(lab.cells[0][0]);
+    //lab.generate(lab.cells[0][0]);
 
     lab.print();
-
-    lab.debug();
 
 
 
