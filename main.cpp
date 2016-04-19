@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 {
 
     json j;
-    
+
     // input maze sizes
 
     int width, height;
@@ -37,6 +37,12 @@ int main(int argc, char **argv)
 
     lab.print();
 
+    std::unordered_set<int>::iterator it;
+    for(it = lab.visited.begin(); it != lab.visited.end(); ++it){
+        std::cout << *it << std::endl;
+    }
+
+    //lab.debug();
 
 
     return 0;

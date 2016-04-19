@@ -182,11 +182,17 @@ cell maze::getCell(int x, int y){
 }
 
 void maze::generate(cell& c){
+    using namespace std::chrono_literals;
+    std::this_thread::sleep_for(1s);
     //this->debug();
     std::cout << "generate()" << std::endl;
+    std::unordered_set<int>::iterator it;
+    for(it = this->visited.begin(); it != this->visited.end(); ++it){
+        std::cout << *it << std::endl;
+    }
     if(this->visited.size() != this->width * this->height){
         c.setMark(true);
-        this->visited.insert(c.getId());  // code ne respectant pas les pointeurs sur dividers
+        this->visited.insert(c.getId());
         cell* tab[4] = {NULL, NULL, NULL, NULL};
         // on sélectionne les cellules voisines non explorées
         if(c.getDividerLeft() == 1){
@@ -216,41 +222,41 @@ void maze::generate(cell& c){
         this->print();
         std::vector<int> v = indexes(tab, 4);
         // si il y a au moins un cellule voisine disponible...
-        std::cout << v.size() << std::endl;
          if(v.size() > 0){
             int way = 4;
             // on tire au sort parmis les cellules inexplorées voisines
             way = rand() % v.size();
-            std::cout << v[way] << std::endl;
             // on casse la cloison séparant les deux cellules
             //  et on rappelle la fonction avec en parametre la cellule voisine choisie
             switch (v[way]) {
                 case 0:
                     std::cout << "left" << std::endl;
+                    c.getLeftCell()->setDividerRight(0);
+                    std::cout << "c.getLeftCell()->setDividerRight(0): " << c.getLeftCell()->getDividerRight() << std::endl;
                     c.setDividerLeft(0);
-                    (c.getLeftCell())->setDividerRight(0);
-                    this->antecedent.push(c);
+                    std::cout << "c.getDividerLeft(0); " << c.getDividerLeft() << std::endl;
+                    this->antecedent.push(&c);
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
                     std::cout << "up" << std::endl;
+                    c.getUpCell()->setDividerDown(0);
                     c.setDividerUp(0);
-                    (c.getUpCell())->setDividerDown(0);
-                    this->antecedent.push(c);
+                    this->antecedent.push(&c);
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
                     std::cout << "right" << std::endl;
+                    c.getRightCell()->setDividerLeft(0);
                     c.setDividerRight(0);
-                    (c.getRightCell())->setDividerLeft(0);
-                    this->antecedent.push(c);
+                    this->antecedent.push(&c);
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
                     std::cout << "down" << std::endl;
+                    c.getDownCell()->setDividerUp(0);
                     c.setDividerDown(0);
-                    (c.getDownCell())->setDividerUp(0);
-                    this->antecedent.push(c);
+                    this->antecedent.push(&c);
                     this->generate(*(c.getDownCell()));
                     break;
                 default:
@@ -259,14 +265,15 @@ void maze::generate(cell& c){
 
         }else{
             // si pas de cellule voisine inexplorée on recule
-            std::cout << "on recuuuuule" << std::endl;
+            std::cout << "on recule" << std::endl;
             if(this->antecedent.size() > 0){
+                cell n = *(this->antecedent.top());
                 this->antecedent.pop();
-                this->generate(this->antecedent.top());
+                this->generate(n);
             }
         }
     }else{
-        std::cout << "stooooop!" << std::endl;
+        std::cout << "fin" << std::endl;
     }
 }
 
