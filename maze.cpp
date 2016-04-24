@@ -182,10 +182,8 @@ cell maze::getCell(int x, int y){
 }
 
 void maze::generate(cell& c){
-    using namespace std::chrono_literals;
-    std::this_thread::sleep_for(1s);
-    //this->debug();
-    std::cout << "generate()" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    std::cout << "------------------------------------------" << std::endl;
     std::unordered_set<int>::iterator it;
     for(it = this->visited.begin(); it != this->visited.end(); ++it){
         std::cout << *it << std::endl;

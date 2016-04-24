@@ -50,6 +50,7 @@ private:
      *  - un mur = -1
      *  - une cloison = 1
      *  - la cellule voisine = 0
+     *  - entrée ou sortie = 2
      */
     int dividerLeft;
     int dividerUp;
