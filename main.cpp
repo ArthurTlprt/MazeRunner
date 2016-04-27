@@ -5,13 +5,34 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using json = nlohmann::json;
 
 int main(int argc, char **argv)
 {
+    // crée un objet json
+    json j = "{ \"happy\": true, \"pi\": 3.141 }"_json;
+    std::cout << j["happy"] << std::endl;
 
-    json j;
+
+    // écrit un objet json dans un fichier
+    std::ofstream writefile;
+    writefile.open ("maze.json");
+    writefile << j;
+    writefile.close();
+
+    // crée un objet json à partir d'un fichier
+    json jsonRead;
+    std::string line;
+    std::ifstream readfile("maze.json");
+    if (readfile.is_open()){
+      getline (readfile,line);
+      // json::parse permet de transformer un string en objet json
+      jsonRead =  json::parse(line);
+      readfile.close();
+    }
+    std::cout << jsonRead << std::endl;
 
     // input maze sizes
 
@@ -35,7 +56,6 @@ int main(int argc, char **argv)
 
     //lab.generate(lab.cells[0][0]);
 
-    lab.print();
 
     std::unordered_set<int>::iterator it;
     for(it = lab.visited.begin(); it != lab.visited.end(); ++it){
@@ -44,6 +64,7 @@ int main(int argc, char **argv)
 
     //lab.debug();
 
+    lab.print();
 
     return 0;
 }

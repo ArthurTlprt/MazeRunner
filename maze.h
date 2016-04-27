@@ -38,6 +38,7 @@ private:
     void initCells();
     void printHori(int d);
     void printVert(int d);
+    std::vector<int> getNexts(cell&);
     int width;
     int height;
 };
