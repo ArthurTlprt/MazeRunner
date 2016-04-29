@@ -31,7 +31,8 @@ public:
     void debug();
     cell getCell(int x, int y);
     std::vector<std::vector<cell> > cells;
-    std::stack<cell*> antecedent;
+    //std::stack<cell*> antecedent;
+    std::stack<cell> antecedent;
     std::unordered_set<int> visited;
     void generate(cell&);
 private:

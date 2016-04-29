@@ -243,7 +243,8 @@ void maze::generate(cell& c){
             // on casse la cloison séparant les deux cellules
             //  et on rappelle la fonction avec en parametre la cellule voisine choisie
             //
-            this->antecedent.push(&c);
+            //this->antecedent.push(&c);
+            this->antecedent.push(c);
             std::cout << "this->antecedent.size(): " <<this->antecedent.size() << std::endl;
             switch (v[way]) {
                 case 0:
@@ -282,7 +283,8 @@ void maze::generate(cell& c){
             // si pas de cellule voisine inexplorée on recule
             std::cout << "on recule" << std::endl;
             if(this->antecedent.size() > 0){
-                cell n = *(this->antecedent.top());
+                //cell n = *(this->antecedent.top());
+                cell n = (this->antecedent.top());
                 std::cout << "debug the top of the stack" << std::endl;
                 n.debug();
                 this->antecedent.pop();
