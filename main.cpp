@@ -62,7 +62,7 @@ int main(int argc, char **argv)
         std::cout << *it << std::endl;
     }
 
-    //lab.debug();
+    lab.debug();
 
     lab.print();
 

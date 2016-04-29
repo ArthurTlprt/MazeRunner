@@ -243,32 +243,37 @@ void maze::generate(cell& c){
             // on casse la cloison séparant les deux cellules
             //  et on rappelle la fonction avec en parametre la cellule voisine choisie
             //
+            this->antecedent.push(&c);
+            std::cout << "this->antecedent.size(): " <<this->antecedent.size() << std::endl;
             switch (v[way]) {
-                this->antecedent.push(&c);
                 case 0:
                     std::cout << "left" << std::endl;
                     c.getLeftCell()->setDividerRight(0);
                     std::cout << "c.getLeftCell()->setDividerRight(0): " << c.getLeftCell()->getDividerRight() << std::endl;
                     c.setDividerLeft(0);
                     std::cout << "c.getDividerLeft(0); " << c.getDividerLeft() << std::endl;
+                    c.debug();
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
                     std::cout << "up" << std::endl;
                     c.getUpCell()->setDividerDown(0);
                     c.setDividerUp(0);
+                    c.debug();
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
                     std::cout << "right" << std::endl;
                     c.getRightCell()->setDividerLeft(0);
                     c.setDividerRight(0);
+                    c.debug();
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
                     std::cout << "down" << std::endl;
                     c.getDownCell()->setDividerUp(0);
                     c.setDividerDown(0);
+                    c.debug();
                     this->generate(*(c.getDownCell()));
                     break;
             }
