@@ -67,6 +67,7 @@ void maze::printVert(int d){
 }
 
 void maze::print(){
+    std::cout << std::endl << std::endl;
     for(int line = 0; line < this->height; ++line){
 
         for(int col = 0; col < this->width; ++col){
@@ -189,25 +190,21 @@ std::vector<int> maze::getNexts(cell& c){
     //
     if(c.getDividerLeft() == 1){
         if(c.getLeftCell()->isMarked() == false){
-            std::cout << "tab[0]" << std::endl;
             tab[0] = c.getLeftCell();
         }
     }
     if(c.getDividerUp() == 1){
         if(c.getUpCell()->isMarked() == false){
-            std::cout << "tab[1]" << std::endl;
             tab[1] = c.getUpCell();
         }
     }
     if(c.getDividerRight() == 1){
         if(c.getRightCell()->isMarked() == false){
-            std::cout << "tab[2]" << std::endl;
             tab[2] = c.getRightCell();
         }
     }
     if(c.getDividerDown() == 1){
         if(c.getDownCell()->isMarked() == false){
-            std::cout << "tab[3]" << std::endl;
             tab[3] = c.getDownCell();
         }
     }
@@ -219,13 +216,6 @@ void maze::generate(cell& c){
     // On attend avant d'aficher
     //
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
-    std::cout << "------------------------------------------" << std::endl;
-    // debug du unordered_set
-    //
-    std::unordered_set<int>::iterator it;
-    for(it = this->visited.begin(); it != this->visited.end(); ++it){
-        std::cout << *it << std::endl;
-    }
     // si pas toutes les cellules explorées, continue
     //
     if(this->visited.size() != this->width * this->height){
@@ -245,49 +235,34 @@ void maze::generate(cell& c){
             //
             this->antecedent.push(&c);
             //this->antecedent.push(c);
-            std::cout << "this->antecedent.size(): " <<this->antecedent.size() << std::endl;
             switch (v[way]) {
                 case 0:
-                    std::cout << "left" << std::endl;
                     c.getLeftCell()->setDividerRight(0);
-                    std::cout << "c.getLeftCell()->setDividerRight(0): " << c.getLeftCell()->getDividerRight() << std::endl;
                     c.setDividerLeft(0);
-                    std::cout << "c.getDividerLeft(0); " << c.getDividerLeft() << std::endl;
-                    c.debug();
                     this->generate(*(c.getLeftCell()));
                     break;
                 case 1:
-                    std::cout << "up" << std::endl;
                     c.getUpCell()->setDividerDown(0);
                     c.setDividerUp(0);
-                    c.debug();
                     this->generate(*(c.getUpCell()));
                     break;
                 case 2:
-                    std::cout << "right" << std::endl;
                     c.getRightCell()->setDividerLeft(0);
                     c.setDividerRight(0);
-                    c.debug();
                     this->generate(*(c.getRightCell()));
                     break;
                 case 3:
-                    std::cout << "down" << std::endl;
                     c.getDownCell()->setDividerUp(0);
                     c.setDividerDown(0);
-                    c.debug();
                     this->generate(*(c.getDownCell()));
                     break;
             }
 
         }else{
             // si pas de cellule voisine inexplorée on recule
-            std::cout << "on recule" << std::endl;
             if(this->antecedent.size() > 0){
                 cell n = *(this->antecedent.top());
-                std::cout << "debug the top of the stack" << std::endl;
-                n.debug();
                 this->antecedent.pop();
-                std::cout << "----------------------" << std::endl;
                 int id = n.getId();
                 for(std::vector<cell>&line: this->cells){
                     for(cell&item: line){
