@@ -6,6 +6,7 @@ class cell
 {
 public:
     cell();
+    //cell(const cell& c);
     cell(int id);
     cell(int x, int y);
     cell(cell* left,cell* up,cell* right,cell* down);

@@ -5,6 +5,14 @@
 cell::cell()
 {
 }
+/*
+cell::cell(const cell& c){
+  leftCell = new cell();
+  upCell = new cell();
+  rightCell = new cell();
+  downCell = new cell();
+
+}*/
 
 cell::cell(int x, int y) {
     this->setMark(false);
