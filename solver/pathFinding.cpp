@@ -29,12 +29,11 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
     while(!openList.empty()){
         // On recupere le noeud avec le poid le plus faible
         cell_current = openList.back();
-        std::cout << "node_current : " << cell_current << std::endl;
         // Si c'est le noeud d'arrivé on stop
         if(cell_current == cell_goal){
             std::cout << "Reach" << std::endl;
             std::cout << "Voici le chemin a prendre : ";
-            displayList(closeList,"");
+            displayList(closeList,"Chemin : ");
             std::cout << std::endl;
             return 0;
         }else{
@@ -43,11 +42,9 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
             // Pour chaque successeur on defini sont g
             for(it_node_successor=successors.begin();it_node_successor!=successors.end();it_node_successor++){
                 node_stock = *(it_node_successor);
-                std::cout << "node_successor : " << node_stock << std::endl;
                 // trouvé si le noeud est deja dans OPEN ou CLOSE, si oui on le jette de la liste
                 itListOpen = find(openList.begin(),openList.end(),node_stock);
                 itListClose = find(closeList.begin(),closeList.end(),node_stock);
-                displayList(openList,"open");
                 if( (itListOpen!=openList.end() && node_stock.getHeurist() <= (*(itListOpen)).getHeurist()) || (itListClose!=closeList.end() && node_stock.getHeurist() <= (*(itListClose)).getHeurist())){
                 }else{
                 node_stock.setCost(cell_current.getCost()+1);
@@ -59,7 +56,6 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
             }
         }
         closeList.push_back(cell_current);
-        displayList(closeList,"close");
     }
     return -1;
 }
