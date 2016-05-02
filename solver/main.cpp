@@ -16,15 +16,9 @@ int main(int argc, char **argv)
     std::string line;
     std::ifstream readfile("../generator/maze.json");
     if(readfile.is_open()){
-        getline(readfile,line);
-        maze = json::parse(line);
-        readfile.close();
+        readfile >> maze;
     }
     std::map<std::string,std::string> coordMaze = recup(maze);
-    int size;
-    std::cout << "Size of the maze : ";
-    std::cin >> size;
-    std::cout << std::endl;
-    findPath(coordMaze,size);
+    findPath(coordMaze,maze["dim"]["height"]);
     return 0;
 }
