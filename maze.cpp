@@ -44,7 +44,6 @@ json maze::save(){
   return g;
 }
 
-
 std::vector<int> indexes(cell* tab[], int len){
     std::vector<int> v;
     for(int i = 0; i < len; ++i){
