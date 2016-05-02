@@ -43,7 +43,7 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
             // Pour chaque successeur on defini sont g
             for(it_node_successor=successors.begin();it_node_successor!=successors.end();it_node_successor++){
                 node_stock = *(it_node_successor);
-                std::cout << "node_successor(" << i << " ): " << node_stock << std::endl;
+                std::cout << "node_successor : " << node_stock << std::endl;
                 // trouvé si le noeud est deja dans OPEN ou CLOSE, si oui on le jette de la liste
                 itListOpen = find(openList.begin(),openList.end(),node_stock);
                 itListClose = find(closeList.begin(),closeList.end(),node_stock);
@@ -70,14 +70,14 @@ std::vector<node> createSuccessor(std::string successorsString){
     std::vector<node> successors;
     
     std::multimap<int,int> coordChild = parseSuccessor(successorsString);
-    for(itChild = coordChild.begin();itChild!=coordChild.end();itChild+){
+    for(itChild = coordChild.begin();itChild!=coordChild.end();itChild++){
         successors.push_back(node((*itChild).first,(*itChild).second));
     }
     return successors;
 };
 
 float distance(node goal, node current){
-    float h =  sqrt((goal.getX()-current.getX())*(goal.getX()-current.getX())(goal.getY()-current.getY())*(goal.getY()-current.getY()));
+    float h =  sqrt((goal.getX()-current.getX())*(goal.getX()-current.getX())+(goal.getY()-current.getY())*(goal.getY()-current.getY()));
     return h;
 };
 
