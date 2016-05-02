@@ -18,6 +18,8 @@
 #include <unordered_set>
 #include <chrono>
 #include <thread>
+#include "json.hpp"
+using json = nlohmann::json;
 
 
 
@@ -29,6 +31,7 @@ public:
     virtual ~maze();
     void print();
     void debug();
+    json save();
     cell getCell(int x, int y);
     std::vector<std::vector<cell> > cells;
     std::stack<cell*> antecedent;

@@ -9,6 +9,41 @@
 #include "maze.h"
 
 //utils
+json maze::save(){
+  json g;
+  for (int i=0;i<this->height;i++){
+    for(int j=0;j<this->width;j++){
+      json m;
+      if(this->cells[i][j].getDividerUp()==0){
+        std::string b;
+        int a=i-1;
+        b=std::to_string(a) + ','+ std::to_string(j);
+        m.push_back(b);
+      }
+      if(this->cells[i][j].getDividerRight()==0){
+        std::string b;
+        int a=j+1;
+        b=std::to_string(i)+','+std::to_string(a);
+        m.push_back(b);
+      }
+      if(this->cells[i][j].getDividerDown()==0){
+        std::string b;
+        int a=i+1;
+        b=std::to_string(a)+','+std::to_string(j);
+        m.push_back(b);
+      }
+      if(this->cells[i][j].getDividerLeft()==0){
+        std::string b;
+        int a=j-1;
+        b=std::to_string(i)+','+std::to_string(a);
+        m.push_back(b);
+      }
+      g[i][j]=m;
+    }
+  }
+  return g;
+}
+
 
 std::vector<int> indexes(cell* tab[], int len){
     std::vector<int> v;
