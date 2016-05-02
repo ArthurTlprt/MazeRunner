@@ -3,6 +3,8 @@
 #include <string>
 #include <list>
 #include <map>
+#include "../generator/json.hpp"
+using json = nlohmann::json;
 
 std::vector<node> createSuccessor(std::string successorsString);
 float distance(node goal, node current);
