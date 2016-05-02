@@ -4,8 +4,6 @@
 #include "pathFinding.h"
 #include <math.h>
 #include <sstream>
-#include "../generator/json.hpp"
-using json = nlohmann::json;
 
 int findPath(std::map<std::string,std::string> maze_map,int size)
 {    
