@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include "pathFinding.h"
 #include "../generator/json.hpp"
 
 using json = nlohmann::json;
