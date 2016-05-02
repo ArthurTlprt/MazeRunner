@@ -11,3 +11,4 @@ float distance(node goal, node current);
 std::multimap<int,int> parseSuccessor(std::string successor);
 void displayList(std::list<node> list, std::string name);
 int findPath(std::map<std::string,std::string> maze_map,int size);
+std::map<std::string,std::string> recup(json maze);
