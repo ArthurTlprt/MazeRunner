@@ -4,8 +4,8 @@
 #include <list>
 #include <map>
 
-node getLowestFOfList(std::list<node> list);
-std::vector<node> createSuccessor(std::string);
+std::vector<node> createSuccessor(std::string successorsString);
 float distance(node goal, node current);
 std::multimap<int,int> parseSuccessor(std::string successor);
 void displayList(std::list<node> list, std::string name);
+int findPath(std::map<std::string,std::string> maze_map,int size);
