@@ -51,5 +51,7 @@ int main(int argc, char **argv)
 
     lab.print();
 
+    std::cout << "tadaaaa" << std::endl;
+
     return 0;
 }
