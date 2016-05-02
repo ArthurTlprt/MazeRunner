@@ -10,38 +10,50 @@
 
 //utils
 json maze::save(){
-  json g;
-  for (int i=0;i<this->height;i++){
-    for(int j=0;j<this->width;j++){
-      json m;
+  json g;					//on crée un format json qui sera notre tableau final a deux dimensions.
+  json r;
+  r["width"]=this->width;
+  r["height"]=this->height;				//avec en plus les dimensions du labyrinthe
+  for (int i=0;i<this->height;i++){	
+    for(int j=0;j<this->width;j++){			// on parcourt le tableau 
+      json m;	
+	std::string b;					// on utilise un json temporaire pour chaque case 
       if(this->cells[i][j].getDividerUp()==0){
-        std::string b;
         int a=i-1;
         b=std::to_string(a) + ','+ std::to_string(j);
-        m.push_back(b);
+        
       }
-      if(this->cells[i][j].getDividerRight()==0){
-        std::string b;
-        int a=j+1;
-        b=std::to_string(i)+','+std::to_string(a);
-        m.push_back(b);
+      if(this->cells[i][j].getDividerRight()==0){	// pour chaque case a coter de la case selectionné, on vérifie si elles sont connecté
+        if(!b.empty()){
+		b+='/';
+	}
+	int a=j+1;
+        b+=std::to_string(i)+','+std::to_string(a);
+        
       }
       if(this->cells[i][j].getDividerDown()==0){
-        std::string b;
+        if(!b.empty()){
+		b+='/';
+	}
         int a=i+1;
-        b=std::to_string(a)+','+std::to_string(j);
-        m.push_back(b);
+        b+=std::to_string(a)+','+std::to_string(j);
+        
       }
       if(this->cells[i][j].getDividerLeft()==0){
-        std::string b;
+        if(!b.empty()){
+		b+='/';
+	}
         int a=j-1;
-        b=std::to_string(i)+','+std::to_string(a);
-        m.push_back(b);
+        b+=std::to_string(i)+','+std::to_string(a);
+        
       }
-      g[i][j]=m;
+      m.push_back(b);
+      g[i][j]=m;					// on save les coordonnées des cases accessibles 
     }
   }
-  return g;
+  json sum;
+  sum={{"dim",r},{"m",g}};
+  return sum;						// on renvoit le tableau a sauvegarder 
 }
 
 std::vector<int> indexes(cell* tab[], int len){
