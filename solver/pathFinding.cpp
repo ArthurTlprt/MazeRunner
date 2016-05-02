@@ -43,7 +43,7 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
             // Pour chaque successeur on defini sont g
             for(it_node_successor=successors.begin();it_node_successor!=successors.end();it_node_successor++){
                 node_stock = *(it_node_successor);
-                std::cout << "node_successor(" << i << " ): " << node_stock << std::endl;
+                std::cout << "node_successor : " << node_stock << std::endl;
                 // trouvé si le noeud est deja dans OPEN ou CLOSE, si oui on le jette de la liste
                 itListOpen = find(openList.begin(),openList.end(),node_stock);
                 itListClose = find(closeList.begin(),closeList.end(),node_stock);
