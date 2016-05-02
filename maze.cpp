@@ -54,6 +54,13 @@ std::vector<int> indexes(cell* tab[], int len){
     return v;
 }
 
+void maze::clear(){
+    for(int i=0; i < 100; ++i){
+        std::cout << std::endl << std::endl;
+    }
+}
+
+
 void printNtimes(std::string str, int n){
     for(int i = 0; i < n; ++i){
         std::cout << str;
@@ -102,6 +109,7 @@ void maze::printVert(int d){
 }
 
 void maze::print(){
+    this->clear();
     std::cout << std::endl << std::endl;
     for(int line = 0; line < this->height; ++line){
 
