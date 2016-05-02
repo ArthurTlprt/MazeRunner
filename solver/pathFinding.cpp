@@ -4,7 +4,8 @@
 #include "pathFinding.h"
 #include <math.h>
 #include <sstream>
-#define lentgthMaze 10
+#include "../generator/json.hpp"
+using json = nlohmann::json;
 
 int findPath(std::map<std::string,std::string> maze_map,int size)
 {    
@@ -100,6 +101,16 @@ void displayList(std::list<node> list,std::string name){
         p++;
     }
     std::cout << std::endl;
+}
+
+std::map<std::string,std::string> recup(json maze){
+    std::map<std::string,std::string> coord;
+    for(int i=0;i<maze["dim"]["height"];i++){
+        for(int j=0;j<maze["dim"]["width"];j++){
+            coord[std::to_string(i)+','+std::to_string(j)]=maze["m"][i][j][0]; 
+        }
+    }
+    return coord;
 }
 
 
