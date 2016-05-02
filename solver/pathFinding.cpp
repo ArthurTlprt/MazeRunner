@@ -77,7 +77,7 @@ std::vector<node> createSuccessor(std::string successorsString){
 };
 
 float distance(node goal, node current){
-    float h =  sqrt((goal.getX()-current.getX())*(goal.getX()-current.getX())(goal.getY()-current.getY())*(goal.getY()-current.getY()));
+    float h =  sqrt((goal.getX()-current.getX())*(goal.getX()-current.getX())+(goal.getY()-current.getY())*(goal.getY()-current.getY()));
     return h;
 };
 
