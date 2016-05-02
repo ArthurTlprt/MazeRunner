@@ -70,7 +70,7 @@ std::vector<node> createSuccessor(std::string successorsString){
     std::vector<node> successors;
     
     std::multimap<int,int> coordChild = parseSuccessor(successorsString);
-    for(itChild = coordChild.begin();itChild!=coordChild.end();itChild+){
+    for(itChild = coordChild.begin();itChild!=coordChild.end();itChild++){
         successors.push_back(node((*itChild).first,(*itChild).second));
     }
     return successors;
