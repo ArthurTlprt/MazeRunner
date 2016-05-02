@@ -10,9 +10,9 @@ Creation d'un generateur/solveur de labyrinthe parfait en C++.
 
 ### Integration ###
 
-Pour compiler une des deux applications:
+Pour compiler  puis lancer une des deux applications:
 
 ```sh
 $ make
-$ ./dist/Debug/GNU-Linux-x86/maze "*"
+$ ./dist/Debug/GNU-Linux-x86/maze
 ```
