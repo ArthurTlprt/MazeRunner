@@ -7,6 +7,7 @@
 
 int findPath(std::map<std::string,std::string> maze_map,int size)
 {    
+    int i=0;
     // OPEN/CLOSED list et leurs iterator
     std::list<node> openList;
     std::list<node>::iterator itListOpen;
@@ -26,7 +27,7 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
     // Ajout du depart a l'open
     openList.push_back(cell_start);
     // Tant qu'on break pas ou que la list n'est pas plein
-    while(!openList.empty()){
+    while(!openList.empty() & i<5000){
         // On recupere le noeud avec le poid le plus faible
         cell_current = openList.back();
         // Si c'est le noeud d'arrivé on stop
@@ -52,10 +53,12 @@ int findPath(std::map<std::string,std::string> maze_map,int size)
                 node_stock.setHeurist(node_stock.getHeurist());
                 openList.push_back(node_stock);
                 openList.sort();
+                i++;
                 }
             }
         }
         closeList.push_back(cell_current);
+        displayList(closeList,"CloseList");
     }
     return -1;
 }
