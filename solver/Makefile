@@ -1,5 +1,5 @@
 # edification des liens
-Programme : main.o cell.o maze.o
+Programme : main.o node.o pathFinding.o
 	g++ -std=c++14 main.o node.o pathFinding.o -o Programme
 	rm -rf *.o
 
