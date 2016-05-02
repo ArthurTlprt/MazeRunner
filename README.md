@@ -16,3 +16,4 @@ Pour compiler  puis lancer une des deux applications:
 $ make
 $ ./dist/Debug/GNU-Linux-x86/maze
 ```
+### Strucure de projet ###

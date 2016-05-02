@@ -11,9 +11,6 @@ using json = nlohmann::json;
 
 int main(int argc, char **argv)
 {
-    // crée un objet json
-    json j = "{ \"happy\": true, \"pi\": 3.141 }"_json;
-    std::cout << j["happy"] << std::endl;
 
 
     // écrit un objet json dans un fichier
@@ -27,7 +24,6 @@ int main(int argc, char **argv)
     std::ifstream readfile("maze.json");
     if (readfile.is_open()){
       getline (readfile,line);
-	std::cout << j["happy"] << std::endl;
       // json::parse permet de transformer un string en objet json
       //jsonRead =  json::parse(line);
       //readfile.close();

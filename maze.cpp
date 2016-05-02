@@ -180,6 +180,12 @@ void maze::initCells(){
     }
 
     // create all dividers and store them in a vector
+    // initialise tous les murs des cellules
+    // toutes les cellules sont fermées au début
+    // -1 donne sur un mur incassable
+    // 1 donne sur un mur cassable
+    // 0 indique qu'il n'y a pas de mur
+    // et 2 indique une entrée ou une sortie
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width; ++j){
             if( i == 0){
@@ -276,7 +282,7 @@ void maze::generate(cell& c){
             //  et on rappelle la fonction avec en parametre la cellule voisine choisie
             //
             this->antecedent.push(&c);
-            //this->antecedent.push(c);
+            // On explore la cellule qui vient d'etre tirée au sort
             switch (v[way]) {
                 case 0:
                     c.getLeftCell()->setDividerRight(0);
@@ -306,6 +312,7 @@ void maze::generate(cell& c){
                 cell n = *(this->antecedent.top());
                 this->antecedent.pop();
                 int id = n.getId();
+                // cherche la cellule qui sera revisitée
                 for(std::vector<cell>&line: this->cells){
                     for(cell&item: line){
                         if(item.getId() == id)
