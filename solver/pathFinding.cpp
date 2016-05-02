@@ -3,22 +3,11 @@
 #include <algorithm>
 #include "pathFinding.h"
 #include <math.h>
+#include <sstream>
 #define lentgthMaze 10
 
-int findPath(std::string maze_Map[][],int size)
-{
-    std::string maze_map[3][3];
-    int i = 0;
-    maze_map[0][0]="0,1/1,0";
-    maze_map[0][1]="0,2/0,0/1,1";
-    maze_map[0][2]="1,2/0,1";
-    maze_map[1][0]="0,0/2,0/1,1";
-    maze_map[1][1]="0,1/2,1/1,0/1,2";
-    maze_map[1][2]="2,2/0,2/1,1";
-    maze_map[2][2]="2,1/1,2";
-    maze_map[2][1]="2,0/2,2/1,1";
-    maze_map[2][0]="2,1/1,0";
-    
+int findPath(std::map<std::string,std::string> maze_map,int size)
+{    
     // OPEN/CLOSED list et leurs iterator
     std::list<node> openList;
     std::list<node>::iterator itListOpen;
@@ -28,12 +17,13 @@ int findPath(std::string maze_Map[][],int size)
     std::vector<node>::iterator it_node_successor;
     
     // Creation de la premiere et derniere case (depart,arrivé)
-    node cell_goal(2,2);
+    node cell_goal(size-1,size-1);
     node cell_start(0,0);
     cell_start.setCost(0);
     cell_start.setHeurist(0);
     node cell_current;
     node node_stock;
+    std::string coor_current;
     // Ajout du depart a l'open
     openList.push_back(cell_start);
     // Tant qu'on break pas ou que la list n'est pas plein
@@ -50,7 +40,7 @@ int findPath(std::string maze_Map[][],int size)
             return 0;
         }else{
             // Sinon on recupére ses successeur
-            successors = createSuccessor(maze_map[cell_current.getX()][cell_current.getY()]);
+            successors = createSuccessor(maze_map[static_cast<std::ostringstream*>( &(std::ostringstream() << cell_current.getX()) )->str() + "," +  static_cast<std::ostringstream*>( &(std::ostringstream() << cell_current.getY()) )->str()]);
             // Pour chaque successeur on defini sont g
             for(it_node_successor=successors.begin();it_node_successor!=successors.end();it_node_successor++){
                 node_stock = *(it_node_successor);
