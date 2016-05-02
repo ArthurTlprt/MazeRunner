@@ -15,4 +15,4 @@ Pour compiler une des deux applications:
 ```sh
 $ make
 $ ./dist/Debug/GNU-Linux-x86/maze "*"
-
+```
