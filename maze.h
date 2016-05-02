@@ -30,11 +30,12 @@ public:
     void print();
     void debug();
     cell getCell(int x, int y);
+    void generate(cell&);
+private:
     std::vector<std::vector<cell> > cells;
     std::stack<cell*> antecedent;
     std::unordered_set<int> visited;
-    void generate(cell&);
-private:
+    void clear();
     void initCells();
     void printHori(int d);
     void printVert(int d);
